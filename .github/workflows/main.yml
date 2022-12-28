@@ -8,6 +8,11 @@ jobs:
     name: "Cloudfix-Linter-Test"
     runs-on: ubuntu-latest
     steps:
-      - name: "Recco"
+      - name: "Recom"
         if: github.event_name == 'pull_request'
         uses: trilogy-group/cloudfix-linter-github-action@main
+        with:
+          tf_cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.pull_request.number }}
+          repository: ${{ github.repository }}
