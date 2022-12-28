@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Recco"
-      - uses: trilogy-group/cloudfix-linter-github-action@main
+        if: github.event_name == 'pull_request'
+        uses: trilogy-group/cloudfix-linter-github-action@main
