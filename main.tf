@@ -12,7 +12,7 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "replace me"
+    organization = "prasheel-test-organization"
 
     workspaces {
       name = "gh-actions-demo"
@@ -40,4 +40,12 @@ resource "aws_ebs_volume" "data-vol" {
     Owner     = "prasheel.tiwari@trilogy.com"
     yor_trace = "2e9ace76-9d14-4a56-8cf4-0a90393b5de6"
   }
+}
+
+resource "aws_efs_file_system" "store" {
+  tags = {
+    Owner     = "cloudfix-linter"
+    yor_trace = "bc1067bc-3d06-4f11-b5a3-d69584df2113"
+  }
+
 }
