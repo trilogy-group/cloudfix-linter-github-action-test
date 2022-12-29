@@ -18,3 +18,4 @@ jobs:
           repository: ${{ github.repository }}
           mock_recommendation: false
           cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
+          cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
