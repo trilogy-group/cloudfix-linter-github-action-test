@@ -16,6 +16,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           pr_number: ${{ github.event.pull_request.number }}
           repository: ${{ github.repository }}
-          mock_recommendation: false
+          mock_recommendation: 'false'
           cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
           cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
