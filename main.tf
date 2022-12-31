@@ -41,3 +41,13 @@ resource "aws_ebs_volume" "data-vol" {
     yor_trace = "2e9ace76-9d14-4a56-8cf4-0a90393b5de6"
   }
 }
+
+resource "aws_instance" "app-server" {
+  instance_type = "t2.micro"
+  ami           = "ami-09d56f8956ab235b3"
+  subnet_id     = "subnet-0ad82a9a46e5aaf68"
+  tags = {
+    Owner     = "prasheel.tiwari@trilogy.com"
+    yor_trace = "d9038013-7b5d-43ad-a101-06efc98a1ff8"
+  }
+}
