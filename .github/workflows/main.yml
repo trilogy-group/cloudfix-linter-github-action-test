@@ -8,25 +8,23 @@ inputs:
 on:
   pull_request:
 
-jobs:
-  setTerraform:
+
+jobs:  
+  assign:
+    name: "Cloudfix-Linter-Test"
+    needs: prepTfstate
+    runs-on: ubuntu-latest
+    steps:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         # terraform_version: 0.13.0:
         cli_config_credentials_token: ${{ inputs.tf_cli_config_credentials_token }}
 
-  prepTfstate: 
     - name: "Terraform-Show_Preparation"
-      needs: [setTerraform]
       run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
       shell: bash
 
-  assign:
-    name: "Cloudfix-Linter-Test"
-    needs: prepTfstate
-    runs-on: ubuntu-latest
-    steps:
     - name: "Recom"
       if: github.event_name == 'pull_request'
       uses: trilogy-group/cloudfix-linter-github-action@developer
