@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: "Recom"
         if: github.event_name == 'pull_request'
-        uses: trilogy-group/cloudfix-linter-github-action@main
+        uses: trilogy-group/cloudfix-linter-github-action@developer
         with:
           tf_cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
