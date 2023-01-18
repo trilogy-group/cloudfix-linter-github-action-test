@@ -14,6 +14,8 @@ jobs:
         # terraform_version: 0.13.0:
         cli_config_credentials_token: ${{ inputs.tf_cli_config_credentials_token }}
 
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: "Terraform-Show_Preparation"
       run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
       shell: bash
