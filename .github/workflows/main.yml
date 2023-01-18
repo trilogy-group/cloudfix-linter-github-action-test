@@ -8,11 +8,9 @@ inputs:
 on:
   pull_request:
 
-
 jobs:  
   assign:
     name: "Cloudfix-Linter-Test"
-    needs: prepTfstate
     runs-on: ubuntu-latest
     steps:
     - name: Setup Terraform
