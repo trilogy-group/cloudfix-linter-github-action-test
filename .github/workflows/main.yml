@@ -1,10 +1,5 @@
 name: "Cloudfix-Linter-Test"
 
-inputs:
-  tf_cli_config_credentials_token: 
-    description: terraform cli config credentials token
-    required: true
-
 on:
   pull_request:
 
