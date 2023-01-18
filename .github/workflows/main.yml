@@ -23,18 +23,18 @@ jobs:
       shell: bash
 
   assign:
-    - name: "Cloudfix-Linter-Test"
-      needs: prepTfstate
-      runs-on: ubuntu-latest
+    name: "Cloudfix-Linter-Test"
+    needs: prepTfstate
+    runs-on: ubuntu-latest
     steps:
-      - name: "Recom"
-        if: github.event_name == 'pull_request'
-        uses: trilogy-group/cloudfix-linter-github-action@developer
-        with:
-          tf_cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pr_number: ${{ github.event.pull_request.number }}
-          repository: ${{ github.repository }}
-          mock_recommendations: 'true'
-          cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
-          cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
+    - name: "Recom"
+      if: github.event_name == 'pull_request'
+      uses: trilogy-group/cloudfix-linter-github-action@developer
+      with:
+        tf_cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        pr_number: ${{ github.event.pull_request.number }}
+        repository: ${{ github.repository }}
+        mock_recommendations: 'true'
+        cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
+        cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
