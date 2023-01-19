@@ -3,19 +3,30 @@ name: "Cloudfix-Linter-Test"
 on:
   pull_request:
 
-jobs:
+jobs:  
   assign:
     name: "Cloudfix-Linter-Test"
     runs-on: ubuntu-latest
     steps:
-      - name: "Recom"
-        if: github.event_name == 'pull_request'
-        uses: trilogy-group/cloudfix-linter-github-action@main
-        with:
-          tf_cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pr_number: ${{ github.event.pull_request.number }}
-          repository: ${{ github.repository }}
-          mock_recommendations: 'true'
-          cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
-          cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        # terraform_version: 0.13.0:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Terraform-Show Preparation
+      run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
+      shell: bash
+
+    - name: "Recom"
+      if: github.event_name == 'pull_request'
+      uses: trilogy-group/cloudfix-linter-github-action@main
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        pr_number: ${{ github.event.pull_request.number }}
+        repository: ${{ github.repository }}
+        mock_recommendations: 'true'
+        cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
+        cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
