@@ -2,7 +2,7 @@ name: "Cloudfix-Linter-Test"
 
 on:
   pull_request:
-
+ 
 jobs:
   assign:
     name: "Cloudfix-Linter-Test"
