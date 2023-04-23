@@ -22,7 +22,7 @@ jobs:
 
     - name: "Recom"
       if: github.event_name == 'pull_request'
-      uses: trilogy-group/cloudfix-linter-github-action@main
+      uses: trilogy-group/cloudfix-linter-github-action@cli-v2.4.3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         pr_number: ${{ github.event.pull_request.number }}
