@@ -20,6 +20,9 @@ jobs:
       run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
       shell: bash
 
+    - name: "Check terraform version"
+      run: terraform version && terraform version -json
+      shell: bash
     - name: "Recom"
       if: github.event_name == 'pull_request'
       uses: trilogy-group/cloudfix-linter-github-action@df1d5f8ae8861d4c8b4c1b08e76da25a45af4498
