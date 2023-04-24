@@ -33,4 +33,4 @@ jobs:
         mock_recommendations: 'true'
         cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
         cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
-        terraform_binary_path: ${{ TERRAFORM_CLI_PATH }}/terraform-bin
+        terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin
