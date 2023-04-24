@@ -21,7 +21,7 @@ jobs:
       shell: bash
 
     - name: "Check terraform version"
-      run: terraform version && terraform version -json
+      run: terraform version && terraform version -json && echo $(which terraform)
       shell: bash
     - name: "Recom"
       if: github.event_name == 'pull_request'
