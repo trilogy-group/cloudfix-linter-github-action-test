@@ -17,9 +17,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Initialise terraform
+      run: terraform init
+
     - name: "Recom"
       if: github.event_name == 'pull_request'
-      uses: trilogy-group/cloudfix-linter-github-action@cf0a76c0c842bcd1e39a5de2c57031968ee844a5
+      uses: trilogy-group/cloudfix-linter-github-action@6025f2ad5ba61773ce2a3c981092a264387744dc
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         pr_number: ${{ github.event.pull_request.number }}
