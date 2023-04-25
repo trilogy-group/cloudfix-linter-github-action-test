@@ -36,6 +36,7 @@ jobs:
         mock_recommendations: 'true'
         cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
         cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
+        terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin
 ```
 1. Setup Terraform: Uses [this](https://github.com/hashicorp/setup-terraform) github action to setup terraform along with credential token (provided through github secrets) which will be used in futher terraform commands
 2. Checkout: Uses [this](https://github.com/actions/checkout) github action to checkout the current repo
@@ -45,3 +46,4 @@ jobs:
     2. pr_number, repository: Again made available by the workflow itself. It is used for making the comments on Pull request
     3. mock_redommendation: `true` for mock, `false` for using cloudfix API
     4. cloudfix_username, cloudfix_password: Cloudfix credentions (required if not using `mock_recommendations`)
+    5. CLI can take absolute `terraform_binary_path` if the CLI is failing to find that on its own
