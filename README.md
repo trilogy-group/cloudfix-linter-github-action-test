@@ -1,9 +1,10 @@
 # cloudfix-linter-github-action-test
 
 ## Flow of Github action
-1. Provide the tf.show file before starting the action
-2. Use the [action](https://github.com/trilogy-group/cloudfix-linter-github-action) to generate mock recommendations
-3. The action itself provides lintings as comments on the PR
+1. Setup terraform
+2. Checkout your repository
+3. Use the [action](https://github.com/trilogy-group/cloudfix-linter-github-action) to generate mock recommendations
+4. The action provides lintings as comments on the PR
 
 
 ## Steps of the Job in workflow:
@@ -22,10 +23,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Terraform-Show Preparation
-      run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
-      shell: bash
-
     - name: "Recom"
       if: github.event_name == 'pull_request'
       uses: trilogy-group/cloudfix-linter-github-action@main
@@ -33,15 +30,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         pr_number: ${{ github.event.pull_request.number }}
         repository: ${{ github.repository }}
-        mock_recommendations: 'true'
+        mock_recommendations: 'false'
         cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
         cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
         terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin
 ```
 1. Setup Terraform: Uses [this](https://github.com/hashicorp/setup-terraform) github action to setup terraform along with credential token (provided through github secrets) which will be used in futher terraform commands
 2. Checkout: Uses [this](https://github.com/actions/checkout) github action to checkout the current repo
-3. Terraform-Show Preparation: Uses [prepTfstate.sh](prepTfstate.sh) file to generate `tf.show` to be used in the next step
-4. Recom: Uses our [cloudfix-linter-github-action](https://github.com/trilogy-group/cloudfix-linter-github-action) which has the following requirements
+3. Recom: Uses our [cloudfix-linter-github-action](https://github.com/trilogy-group/cloudfix-linter-github-action) which has the following requirements
     1. GITHUB_TOKEN: Always made available by github itself as `secrets.GITHUB_TOKEN` with [these permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)
     2. pr_number, repository: Again made available by the workflow itself. It is used for making the comments on Pull request
     3. mock_redommendation: `true` for mock, `false` for using cloudfix API
