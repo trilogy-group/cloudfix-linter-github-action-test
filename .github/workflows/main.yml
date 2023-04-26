@@ -20,14 +20,6 @@ jobs:
     - name: Initialise terraform
       run: terraform init
 
-    - name: Prepare files
-      run: terraform show -json > temp1 && terraform show -json | head -2 | tail -1 > temp2
-
-    - name: Print1
-      run: cat temp1
-    
-    - name: Print2
-      run: cat temp2
     - name: "Recom"
       if: github.event_name == 'pull_request'
       uses: trilogy-group/cloudfix-linter-github-action@main
