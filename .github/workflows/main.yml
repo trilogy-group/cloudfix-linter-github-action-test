@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Initialise terraform
-      run: terraform init && terraform state rm aws_s3_bucket.prasheel-test-bucket -lock=false && terraform state rm aws_ebs_volume.data-vol -lock=false && terraform apply -auto-approve
+      run: terraform init && terraform state rm aws_s3_bucket.prasheel-test-bucket && terraform state rm aws_ebs_volume.data-vol #&& terraform apply -auto-approve
 
     - name: Prepare files
       run: terraform show -json > temp1 && terraform show -json | head -2 | tail -1 > temp2
@@ -28,14 +28,14 @@ jobs:
     
     - name: Print2
       run: cat temp2
-    - name: "Recom"
-      if: github.event_name == 'pull_request'
-      uses: trilogy-group/cloudfix-linter-github-action@cad2af148fa0c5ad051ad1e0404e205da3a920e3
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        pr_number: ${{ github.event.pull_request.number }}
-        repository: ${{ github.repository }}
-        mock_recommendations: 'true'
-        cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
-        cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
-        terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin
+    # - name: "Recom"
+    #   if: github.event_name == 'pull_request'
+    #   uses: trilogy-group/cloudfix-linter-github-action@cad2af148fa0c5ad051ad1e0404e205da3a920e3
+    #   with:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     pr_number: ${{ github.event.pull_request.number }}
+    #     repository: ${{ github.repository }}
+    #     mock_recommendations: 'true'
+    #     cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
+    #     cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
+    #     terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin
