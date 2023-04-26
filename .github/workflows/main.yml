@@ -30,7 +30,7 @@ jobs:
       run: cat temp2
     - name: "Recom"
       if: github.event_name == 'pull_request'
-      uses: trilogy-group/cloudfix-linter-github-action@cad2af148fa0c5ad051ad1e0404e205da3a920e3
+      uses: trilogy-group/cloudfix-linter-github-action@main
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         pr_number: ${{ github.event.pull_request.number }}
