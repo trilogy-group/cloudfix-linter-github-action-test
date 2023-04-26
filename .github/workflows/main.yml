@@ -11,15 +11,23 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        # terraform_version: 0.13.0:
+        terraform_version: 1.3.0
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Terraform-Show Preparation
-      run: echo Going to run prepTfstate ; sh ./prepTfstate.sh
-      shell: bash
 
+    - name: Initialise terraform
+      run: terraform init
+
+    - name: Prepare files
+      run: terraform show -json > temp1 && terraform show -json | head -2 | tail -1 > temp2
+
+    - name: Print1
+      run: cat temp1
+    
+    - name: Print2
+      run: cat temp2
     - name: "Recom"
       if: github.event_name == 'pull_request'
       uses: trilogy-group/cloudfix-linter-github-action@main
@@ -30,3 +38,4 @@ jobs:
         mock_recommendations: 'true'
         cloudfix_username: ${{ secrets.CLOUDFIX_USERNAME }}
         cloudfix_password: ${{ secrets.CLOUDFIX_PASSWORD }}
+        terraform_binary_path: ${{ env.TERRAFORM_CLI_PATH }}/terraform-bin

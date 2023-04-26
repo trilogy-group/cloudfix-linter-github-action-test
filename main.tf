@@ -12,7 +12,7 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "prasheel-test-organization"
+    organization = "yogesh-ti-org"
 
     workspaces {
       name = "gh-actions-demo"
@@ -24,20 +24,20 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "prasheel-test-bucket" {
+resource "aws_s3_bucket" "cloudfix-linter-gh-action-bucket" {
   bucket_prefix = "my-tf-bucket-cloudfixlinter"
   tags = {
-    Owner     = "prasheel.tiwari@trilogy.com"
-    yor_trace = "1bf819f5-d130-4f67-810e-d6e24e32e125"
+    Owner                       = "yogesh.kumar@trilogy.com"
+    "cloudfix:linter_yor_trace" = "97947a7b-2986-41b7-a6fb-a64ca78a4d07"
   }
 }
 
-resource "aws_ebs_volume" "data-vol" {
+resource "aws_ebs_volume" "cloudfix-linter-gh-action-data-vol" {
   availability_zone = "us-east-1a"
   size              = 1
   type              = "gp2"
   tags = {
-    Owner     = "prasheel.tiwari@trilogy.com"
-    yor_trace = "2e9ace76-9d14-4a56-8cf4-0a90393b5de6"
+    Owner                       = "yogesh.kumar@trilogy.com"
+    "cloudfix:linter_yor_trace" = "23075b98-f180-4c01-a86d-d91c8ef9e6e7"
   }
 }
